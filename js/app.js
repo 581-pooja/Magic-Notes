@@ -8,6 +8,7 @@ addBtn.addEventListener("click",function(e){
     let addTxt = document.getElementById("addTxt");
     let notes = localStorage.getItem("notes");
     if(notes == null){
+        // notesObj is array stored in localstorage in form of key-value pair sting 
         notesObj = [];
     }
     else{
@@ -17,7 +18,7 @@ addBtn.addEventListener("click",function(e){
     localStorage.setItem("notes", JSON.stringify(notesObj));
     addTxt.value = "";
     // console.log(notesObj);
-    // console.log(notes); // since notes is not updated therefore one lesss item
+    // console.log(notes); // since notes is not updated therefore one less item
     showNotes();
 });
 
@@ -71,7 +72,8 @@ function deleteNote(index){
 let search = document.getElementById('searchTxt');
 search.addEventListener("input",function () {
 
-    let inputVal = search.value.toLowerCase(); // search ka value input me dal do
+    // search value put in input
+    let inputVal = search.value.toLowerCase(); 
     // console.log("Event Fired" , inputVal);
     let noteCards = document.getElementsByClassName('noteCard');
     // notecards is an html collection so convert to array to use it
@@ -84,7 +86,6 @@ search.addEventListener("input",function () {
         }else{
             element.style.display = 'none';
         }
-
     })
 
 });
