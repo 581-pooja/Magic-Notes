@@ -1,6 +1,7 @@
 // console.log("Hello this is our Notes App.")
 showNotes();
 
+// Function for adding notes
 // If user adds a note add it to local storage
 let addBtn = document.getElementById('addBtn');
 addBtn.addEventListener("click",function(e){
@@ -26,8 +27,6 @@ addBtn.addEventListener("click",function(e){
     localStorage.setItem("notes", JSON.stringify(notesObj));
     addTxt.value = "";
     addTitle.value = "";
-    // console.log(notesObj);
-    // console.log(notes); // since notes is not updated therefore one less item
     
     showNotes();
 });
@@ -63,7 +62,6 @@ function showNotes(){
 
 // Function for deleting a note
 function deleteNote(index){
-    // console.log("I am deleting", index);
 
     let notes = localStorage.getItem('notes');
     if(notes == null){
@@ -85,16 +83,14 @@ search.addEventListener("input",function () {
 
     // search value put in input
     let inputVal = search.value.toLowerCase(); 
-    // console.log("Event Fired" , inputVal);
+    
     let noteCards = document.getElementsByClassName('noteCard');
-    //console.log(noteCards)
     // notecards is an html collection so convert to array to use it
 
     Array.from(noteCards).forEach(function (element) {
         let cardTxt = element.getElementsByTagName("p")[0].innerText.toLowerCase();
         let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLowerCase();
-        //console.log(cardTxt);
-        //console.log(cardTitle);
+        
         if(cardTxt.includes(inputVal)){
             element.style.display = 'block';
         }
