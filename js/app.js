@@ -6,19 +6,29 @@ let addBtn = document.getElementById('addBtn');
 addBtn.addEventListener("click",function(e){
 
     let addTxt = document.getElementById("addTxt");
+    let addTitle = document.getElementById("addTitle");
+
     let notes = localStorage.getItem("notes");
     if(notes == null){
-        // notesObj is array stored in localstorage in form of key-value pair sting 
-        notesObj = [];
+        // notesObj is Object stored in localstorage in form of key-value pair string 
+        notesObj = []; // Empty array
     }
     else{
         notesObj = JSON.parse(notes);
     }
-    notesObj.push(addTxt.value);
+    
+    let myObj = {
+        title : addTitle.value,
+        text : addTxt.value
+    }
+
+    notesObj.push(myObj);
     localStorage.setItem("notes", JSON.stringify(notesObj));
     addTxt.value = "";
+    addTitle.value = "";
     // console.log(notesObj);
     // console.log(notes); // since notes is not updated therefore one less item
+    
     showNotes();
 });
 
@@ -36,8 +46,8 @@ function showNotes(){
         html += `
         <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Note ${index + 1}</h5>
-                    <p class="card-text">${element}</p>
+                    <h5 class="card-title">${element.title}</h5>
+                    <p class="card-text">${element.text}</p>
                     <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Notes</button>
                 </div>
             </div>`;
@@ -63,6 +73,7 @@ function deleteNote(index){
         notesObj = JSON.parse(notes);
     }
 
+    // Splice is splice(start_position, elements_to_delete) (1,1) accteped but not in case of slicing
     notesObj.splice(index,1);
     localStorage.setItem("notes",JSON.stringify(notesObj));
     showNotes();
@@ -76,14 +87,21 @@ search.addEventListener("input",function () {
     let inputVal = search.value.toLowerCase(); 
     // console.log("Event Fired" , inputVal);
     let noteCards = document.getElementsByClassName('noteCard');
+    //console.log(noteCards)
     // notecards is an html collection so convert to array to use it
 
     Array.from(noteCards).forEach(function (element) {
         let cardTxt = element.getElementsByTagName("p")[0].innerText.toLowerCase();
-        // console.log(cardTxt);
+        let cardTitle = element.getElementsByTagName("h5")[0].innerText.toLowerCase();
+        //console.log(cardTxt);
+        //console.log(cardTitle);
         if(cardTxt.includes(inputVal)){
             element.style.display = 'block';
-        }else{
+        }
+        else if(cardTitle.includes(inputVal)){
+            element.style.display = 'block';
+        }
+        else{
             element.style.display = 'none';
         }
     })

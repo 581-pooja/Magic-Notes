@@ -1,3 +1,6 @@
+<!-- Author : Pooja Bhagat -->
+<!-- Date : 13/7/2021 -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,12 +44,18 @@
         <div class="card">
             <div  class="card-body">
                 <h5 class="card-title">Add a note</h5>
+                <!-- For Note Title -->
                 <div class="mb-3">
-                    <textarea id="addTxt" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <input type="text" class="form-control" id="addTitle" placeholder="Add note title" name="addTitle" required="true">
+                  </div>
+                <!-- For Note Description -->
+                <div class="mb-3">
+                    <textarea id="addTxt" class="form-control"  rows="3" placeholder="Add note description" name="addTxt" required="true"></textarea>
                 </div>
                 <button id="addBtn" class="btn btn-primary">Add Notes</button>
             </div>
         </div>
+        
         <hr>
         <!-- Your All Notes -->
         <h1>Your Notes</h1>
